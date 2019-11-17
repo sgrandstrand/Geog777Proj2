@@ -18,7 +18,6 @@ var imagery = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/
 var mapOptions = {
     zoomControl: false,
     center: [48.55, -113.630],
-    //      center: [48.52, -113.630],
     zoom: 9.25,
     minZoom: 3,
     maxZoom: 18,
@@ -27,9 +26,6 @@ var mapOptions = {
 
 var map = L.map('mapid', mapOptions);
 
-//L.control.zoom({
-//    position: 'bottomright'
-//}).addTo(map);
 var zoomHome = L.Control.zoomHome({
     position: 'topleft'
 });
@@ -40,8 +36,6 @@ var baseMaps = {
     "Light": light,
     "Imagery": imagery
 }
-
-
 
 
 // sql queries to get layers
@@ -79,16 +73,12 @@ var sqlQueryddl = "SELECT route_no, trllabel FROM sgrandstrand.gnp_trailss"; // 
 var iconTemp = L.Icon.extend({
     options: {
         iconSize: [25, 25],
-        //        iconAnchor: [-10, 0],
-        //        popupAnchor: [-3, -10]
     }
 });
 
 var iconTemp2 = L.Icon.extend({
     options: {
         iconSize: [20, 20],
-        //        iconAnchor: [-10, 0],
-        //        popupAnchor: [-3, -10]
     }
 });
 
@@ -162,13 +152,6 @@ var tunnelIcon = new iconTemp2({
 //for each point of interest 
 
 var onEachFeature = function (feature, layer) {
-    //    poiSearch.push({
-    //        name: layer.feature.properties.poilabel,
-    //        source: "POI",
-    //        id: L.stamp(layer),
-    //        bounds: layer.getBounds()
-    //    });
-
     if (feature.properties) {
         var popUpContent = makePopUpContent(feature.properties);
         layer.bindPopup(popUpContent);
@@ -180,15 +163,6 @@ var onEachFeature = function (feature, layer) {
             this.closePopup();
         });
     };
-    //            if (!L.Browser.ie && !L.Browser.opera) {
-    //                layer.bringToFront();
-    //            }
-    //        },
-    //        mouseout: function (e) {
-    //            layer.closePopup(popUpContent);
-    //        },
-    //
-    //    });
 
 }
 // function to make our popup-content
@@ -529,14 +503,6 @@ $.getJSON(url23, function (data) {
 var trails = $.getJSON("https://sgrandstrand.carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery1, function (data) {
     trails = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
-            //            console.log(feature);
-            //            console.log(feature.properties);
-            //            trailSearch.push({
-            //                name: feature.properties.trllabel,
-            //                source: "Trails",
-            //                id: L.stamp(layer),
-            //                bounds: layer.getBounds()
-            //            });
             layer.bindPopup('<p><b>' + feature.properties.trllabel + '</b><br/><em>' + 'Surface Type: ' + feature.properties.trlsurface + '<br/><em>' + 'Trail Level: ' + feature.properties.trlclass + '<br/><em>' + 'Miles: ' + feature.properties.miles + '<br/><em>' + 'Reviews: ' + feature.properties.user_date + ': ' + feature.properties.review + '</p>');
             layer.on({
                 mouseover: function (e) {
@@ -588,12 +554,6 @@ function styleFilterTrails(feature) {
 var roads = $.getJSON("https://sgrandstrand.carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery2, function (data) {
     roads = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
-            //            roadSearch.push({
-            //                name: feature.properties.rdlabel,
-            //                source: "Roads",
-            //                id: L.stamp(layer),
-            //                bounds: layer.getBounds()
-            //            });
             layer.bindPopup('<p><b>' + feature.properties.rdlabel + '</b><br /><em>' + 'Surface Type: ' + feature.properties.rdsurface + '</p>');
             layer.on({
                 mouseover: function (e) {
@@ -697,13 +657,6 @@ var locateControl = L.control.locate({
     }
 }).addTo(map);
 
-//var searchSQL = new cartodb.SQL({
-//    user: 'sgrandstrand'
-//});
-//searchSQL.execute("SELECT  FROM sgrandstrand.gnp_poi WHERE poitype IN ('Amphitheater','Boat Launch', 'Bus Stop / Shuttle Stop','Cabin','Campground', 'Entrance Station', 'Food Service', 'Gas Station','Gift Shop','Horseback Riding','Lodging','Parking','Picnic Area','Post Office','Ranger Station','Restroom','Trailhead', 'Train Station','Tunnel','Viewpoint','Visitor Center')")
-
-
-
 
 function getsearchdata() {
     var sqlSer = "SELECT poilabel, poitype, the_geom FROM sgrandstrand.gnp_poi WHERE poitype IN ('Amphitheater','Boat Launch', 'Bus Stop / Shuttle Stop','Cabin','Campground', 'Entrance Station', 'Food Service', 'Gas Station','Gift Shop','Horseback Riding','Lodging','Parking','Picnic Area','Post Office','Ranger Station','Restroom','Trailhead', 'Train Station','Viewpoint','Visitor Center')";
@@ -736,73 +689,11 @@ map.addControl(new L.Control.Search({
     markerLocation: true
 }));
 
-//function searchByAjax(text, callResponse) //callback for 3rd party ajax requests
-//{
-//    return $.ajax({
-//        url: 'search.php',
-//        type: 'GET',
-//        data: {
-//            q: text
-//        },
-//        dataType: 'json',
-//        success: function (json) {
-//            callResponse(json);
-//        }
-//    });
-//}
-
-//
-//function createSearch(featureLayer) {
-//    var searchControl = new L.Control.Search({
-//        layer: featureLayer,
-//        marker: {
-//            circle: {
-//                radius: 16,
-//                color: '#FF0000',
-//                opacity: .25,
-//                weight: 1,
-//                fillOpacity: .25
-//            },
-//            icon: false,
-//        },
-//        propertyName: 'poilabel',
-//        zoom: 12,
-//        collapsed: true,
-//        textPlaceholder: 'Search Point of Interest',
-//        position: 'topleft',
-//        hideMarkerOnCollapse: true,
-//    });
-//    //Open result marker popup
-//    searchControl.on('search:locationfound', function (e) {
-//        if (e.layer._popup) {
-//            let popup = e.layer.getPopup();
-//            e.layer.bindPopup(popup, {
-//                offset: [0, -11],
-//                pane: 'popupPane'
-//            });
-//            e.layer.openPopup();
-//        }
-//        //Restore original style on popup close
-//    }).on('search:collapsed', function (e) {
-//        featuresLayer.eachLayer(function (layer) {
-//            featuresLayer.resetStyle(layer);
-//        });
-//    });
-//    map.addControl(searchControl);
-//}
-
-
-
-
 
 $(document).ready(function () {
     $("#query-trails-reset").click(function () {
         $("#query_trails_form")[0].reset();
     });
-
-
-
-
 
     $('<p class = "controlHeader">Basemap Tilesets</p>').insertBefore('div.leaflet-control-layers-base');
 
@@ -995,92 +886,4 @@ $(document).ready(function () {
         L.DomEvent.disableClickPropagation(container);
     }
 
-
-
-
 });
-
-
-
-//
-//      success: function(trails) {
-//            //Alert the user that everything worked
-//            alert("The conditions report is successfully submitted!  Thanks for your help!");
-//
-//            // Reset the form
-//            $("#update_conditions_form")[0].reset();
-//
-//            //Reset the map with the updated status
-//            showAllTrails();
-//        },
-//        error: function(xhr, status, error) {
-//            alert("Status: " + status + "\nError: " + error);
-//        }
-
-//https://sgrandstrand.carto.com/api/v2/sql?q=SELECT t.the_geom, t.class, t.route_no, t.name, t.meters, t.miles, t.trlname,t.trllabel, t.trlsurface, t.trlclass, u.first_name, u.last_name, u.trail_id, u.user_date, u.review FROM sgrandstrand.gnp_trailss AS t LEFT OUTER JOIN sgrandstrand.user_review AS u ON t.route_no = u.trail_id WHERE t.trlclass LIKE '%Class 2%'&api_key=9127f5c72a53c1d127d45e1ff9a13d521865b7f2
-
-
-
-//SELECT t.the_geom, t.class, t.route_no, t.name, t.meters, t.miles, t.trlname,t.trllabel, t.trlsurface, t.trlclass, u.first_name, u.last_name, u.trail_id, u.user_date, u.review FROM sgrandstrand.gnp_trailss AS t LEFT OUTER JOIN sgrandstrand.user_review AS u ON t.route_no = u.trail_id WHERE t.trlsurface = 'Earth'
-
-
-//INSERT INTO sgrandstrand.user_review(trail_id, review, user_date, first_name, last_name) VALUES(19, 'testing the review', '2019-10-10', 'Eric', 'Grand') & api_key = 9127 f5c72a53c1d127d45e1ff9a13d521865b7f2
-
-//function if want to populate dropdown based on click
-//function populateDropDownList() {
-//    var ddlTrails = document.getElementById("ddlTrails")
-//    $.get("https://sgrandstrand.carto.com/api/v2/sql?q=" + sqlQueryddl + "&api_key=" + apikey,
-//        function (data) {
-//            console.log(data);
-//            for (i = 0; i < data.total_rows; i++) {
-//                var option = document.createElement("OPTION");
-//                option.innerHTML = data.rows[i].trllabel;
-//
-//                //Set CustomerId in Value part.
-//                option.value = data.rows[i].route_no;
-//
-//                //Add the Option element to DropDownList.
-//                ddlTrails.options.add(option);
-//            }
-//        });
-//
-//}
-//        $.ajax({
-//            type: 'POST',
-//            url: 'https://sgrandstrand.carto.com/api/v2/sql?q=',
-//            data: sqlReview,
-//            success: function (responseData, textStatus, jqXHR) {
-//                alert("Your Review has been Posted");
-//                console.log(responseData);
-//                console.log(textStatus);
-//            },
-//            error: function (responseData, textStatus, errorThrown) {
-//                alert("Problem saving the data");
-//            }
-//        });
-
-
-
-//
-//L.control.search({
-//    layer: groupedOverlays,
-//    initial: false,
-//    propertyName: 'poilabel',
-//    buildTip: function (text, val) {
-//        var type = val.layer.feature.properties.poilabel;
-//        return '<a href="#" class="' + type + '">' + text + '<b>' + type + '</b></a>';
-//    }
-//
-//}).addTo(map);
-
-//, {
-//    collapsed: false,
-//}
-
-//function insertReview(trailID, userDate, review_, fn, ln) {
-//
-//
-//
-//    "https://sgrandstrand.carto.com/api/v2/sql?format=GeoJSON&q=" + INSERT INTO sgrandstrand.user_review(trail_id, review, user_date, first_name, last_name) VALUES(trailID, review_, userDate, fn, ln) + "&api_key=" + apikey
-//
-//};
