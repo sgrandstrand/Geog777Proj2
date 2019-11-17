@@ -1,1 +1,292 @@
-*/ Stylesheet by */
+/* Stylesheet by */
+
+html,
+body,
+#container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+}
+
+.controlHeader {
+    font-weight: bold;
+    margin-bottom: .2em;
+
+}
+
+#sidebar {
+    display: block;
+    width: 250px;
+    height: 100%;
+    max-width: 100%;
+    float: left;
+    margin-top: 1%;
+    /*        background-color: #343a40;*/
+}
+
+#mapid {
+    width: auto;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#features {
+    margin: 0px;
+    border: none;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#reviewtrails {
+    margin: 0px;
+    border: none;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#sidebar-hide-btn {
+    margin-top: -2px;
+}
+
+a#filter-btn {
+    color: green;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px #000000;
+
+}
+
+a#review-btn {
+    color: green;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px #000000;
+
+}
+
+a#review-btn:hover {
+    color: snow;
+    /*        cadetblue;*/
+}
+
+a#filter-btn:hover {
+    color: snow;
+    /*        cadetblue;*/
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.card-header {
+    width: 250px;
+}
+
+.card-body {
+    width: 250px;
+}
+
+.feature-row {
+    cursor: pointer;
+    width: 250px;
+}
+
+.sidebar-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    padding-bottom: 75px;
+}
+
+.leaflet-control-layers-expanded {
+    overflow: auto;
+}
+
+.leaflet-control-layers label {
+    font-weight: normal;
+    margin-bottom: 0px;
+}
+
+.leaflet-control-layers-list input[type="radio"],
+input[type="checkbox"] {
+    margin: 2px;
+}
+
+
+.navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 25px;
+    color: #FFFFFF;
+}
+
+.navbar-collapse.in {
+    overflow-y: hidden;
+}
+
+.trailform {
+    width: 200px;
+}
+
+.trail-filter {
+    margin-bottom: 0px;
+}
+
+#trailFiltOutput {
+    padding-bottom: 15px;
+}
+
+.leaflet-control-zoomhome a {
+    font-size: 13pt;
+}
+
+/*
+.navbar-header {
+    margin-right: 15px;
+}
+*/
+
+/* original delete if things are working */
+/*
+.navbar-header .navbar-icon-container {
+    margin-right: 15px;
+}
+*/
+
+
+
+.navbar-icon-container .navbar-icon {
+    line-height: 40px;
+    height: 40px;
+}
+
+.navbar-icon-container a.navbar-icon {
+    margin-left: 25px;
+}
+
+
+
+/*
+
+.typeahead {
+    background-color: #FFFFFF;
+}
+*/
+
+
+/*
+.typeahead-header {
+    margin: 0 5px 5px 5px;
+    padding: 3px 0;
+    border-bottom: 2px solid #333;
+}
+*/
+
+.has-feedback .form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    .navbar .navbar-brand {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 767px) {
+    #sidebar {
+        display: none;
+    }
+
+    .url-break {
+        word-break: break-all;
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+    .dropdown-menu a i {
+        color: #FFFFFF;
+    }
+}
+
+#reviewSubmitBtn {
+    border-radius: 4px;
+    background-color: black;
+    color: whitesmoke;
+}
+
+#reviewSubmitBtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#querySubmitBtn {
+    border-radius: 4px;
+    background-color: darkgreen;
+    color: whitesmoke;
+}
+
+#querySubmitBtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-icon-container {
+    float: right !important;
+    position: absolute;
+    right: 0;
+    /*    top: 0;*/
+    padding-right: 1.5em;
+
+}
+
+.right-addon {
+    margin-left: -2em;
+}
+
+#query-trails-reset {
+    margin-left: 15px;
+}
+
+#query-trails-reset:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*
+.leaflet-control-locate a {
+    margin-top: .3em;
+}
+*/
+
+
+
+/*
+#navbarToggler {
+    right: 0;
+    left: auto;
+}
+*/
+
+/* Print Handling */
+/*xw
+@media print {
+    .navbar {
+        display: none !important;
+    }
+
+    .leaflet-control-container {
+        display: none !important;
+    }
+}
+*/
