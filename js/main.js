@@ -693,6 +693,7 @@ map.addControl(new L.Control.Search({
 $(document).ready(function () {
     $("#query-trails-reset").click(function () {
         $("#query_trails_form")[0].reset();
+        $('#trailFiltOutput').empty();
     });
 
     $('<p class = "controlHeader">Basemap Tilesets</p>').insertBefore('div.leaflet-control-layers-base');
@@ -765,6 +766,7 @@ $(document).ready(function () {
     $("#reviewSubmitBtn").click(function (e) {
         e.preventDefault(); //just use when testing
 
+
         var x = $("#review_trails_form").serializeArray();
 
         var trailVal = x[0].value;
@@ -787,7 +789,9 @@ $(document).ready(function () {
     });
     $("#querySubmitBtn").click(function (e) {
         e.preventDefault(); //just use when testing
+        $('#trailFiltOutput').empty();
         map.removeLayer(trails);
+
         //        map.removeLayer(filterTrails);
 
         var x = $("#query_trails_form").serializeArray();
